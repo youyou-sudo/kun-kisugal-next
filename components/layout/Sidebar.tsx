@@ -38,59 +38,65 @@ const navSections = [
     items: [
       {
         name: 'Ai女友💋',
-        description: '🌟在线畅玩。顶尖色情，即刻生图😍多样角色场景18禁性癖待你开发！💋',
-        href: "https://genrati.xyz?ref_id=006f5ccb-b0d3-471b-a674-de5e5114ed67",
+        description:
+          '🌟在线畅玩。顶尖色情，即刻生图😍多样角色场景18禁性癖待你开发！💋',
+        href: 'https://genrati.xyz?ref_id=006f5ccb-b0d3-471b-a674-de5e5114ed67',
         icon: HeartIcon,
         popover: {
           title: 'Ai女友',
           description: 'Ai女友💋',
-          image: "https://r2.sakinori.top/%E9%A3%8E%E6%9C%88AI/320x500GIF4.gif"
+          image: 'https://r2.sakinori.top/%E9%A3%8E%E6%9C%88AI/320x500GIF4.gif'
         }
       },
       {
         name: '精品飞机杯',
         description: 'AYU-4396 没落女仆のメイド教育😍',
-        href: "https://detail.tmall.com/item.htm?id=1018649046685&spm=a21dvs.23580594.0.0.1e1f645eDQUnq8",
+        href: 'https://detail.tmall.com/item.htm?id=1018649046685&spm=a21dvs.23580594.0.0.1e1f645eDQUnq8',
         icon: HeartIcon,
         popover: {
           title: '彼之良淘宝官方旗舰店',
           description: '飞机杯',
-          image: "https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2.jpg"
+          image:
+            'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2.jpg'
         }
       },
       {
         name: '⚡️翻墙Vpn推荐',
-        description: '翻墙Vpn推荐，加速下载！觉得下载资源慢？觉得加载页面不丝滑？',
-        href: "https://eueua.cc/#/register?code=V437MLYw",
+        description:
+          '翻墙Vpn推荐，加速下载！觉得下载资源慢？觉得加载页面不丝滑？',
+        href: 'https://eueua.cc/#/register?code=V437MLYw',
         icon: HeartIcon,
         popover: {
           title: 'VPN',
           description: '⚡️翻墙Vpn推荐',
-          image: "https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/%E6%96%B9.jpg"
+          image:
+            'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/%E6%96%B9.jpg'
         }
       },
       {
         name: '哔咔漫画',
         description: '哔咔漫画，你想要的这里都有~',
-        href: "https://wrkb-tj.fukmaydt.com/?ch=m1f1v8bk",
+        href: 'https://wrkb-tj.fukmaydt.com/?ch=m1f1v8bk',
         icon: HeartIcon,
         popover: {
           title: '哔咔漫画',
           description: '哔咔漫画',
-          image: "https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/1694af269120260107195520.webp"
-         }
-        },
-        {
+          image:
+            'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/1694af269120260107195520.webp'
+        }
+      },
+      {
         name: '黄油圈',
         description: '福利游戏合集',
-        href: "https://l8.rsjkwh.com/dh980",
+        href: 'https://l8.rsjkwh.com/dh980',
         icon: HeartIcon,
         popover: {
           title: '黄油圈',
           description: '黄油圈',
-          image: "https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/1.jpg"
+          image:
+            'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/1.jpg'
         }
-       }
+      }
     ]
   },
   {
@@ -157,12 +163,7 @@ const SidebarPopoverContent = ({ popover }: { popover: any }) => (
   <div className="px-2 py-2 max-w-[320px]">
     <p className="font-bold text-foreground">{popover.title}</p>
     <p className="text-xs text-default-600 mb-2">{popover.description}</p>
-    <Image
-      src={popover.image}
-      alt={popover.title}
-      width={320}
-      radius="md"
-    />
+    <Image src={popover.image} alt={popover.title} width={320} radius="md" />
   </div>
 )
 
@@ -184,12 +185,12 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
 
     if (isSFW) {
       return (
-        <div className="mx-3 p-3 bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-800 rounded-lg">
+        <div className="mx-3 p-3 bg-primary/30 dark:bg-primary/20 border border-primary/50 dark:border-primary/50 rounded-lg">
           <div className="flex items-start gap-2">
-            <Shield className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
-            <div className="text-xs text-orange-700 dark:text-orange-300">
+            <Shield className="w-4 h-4 text-danger dark:text-danger mt-0.5 flex-shrink-0" />
+            <div className="text-xs">
               <div className="font-medium mb-1">部分 Galgame 已被隐藏</div>
-              <div className="text-orange-600 dark:text-orange-400">
+              <div>
                 网站未启用 NSFW, 部分 Galgame 不可见, 要查看所有 Galgame,
                 请在顶部导航栏切换网站内容显示
               </div>
@@ -207,7 +208,8 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             <div className="text-xs text-pink-700 dark:text-pink-300">
               <div className="font-medium mb-1">网站已进入NSFW模式</div>
               <div className="text-pink-600 dark:text-pink-400">
-                网站已启用 NSFW, 您可访问本站所有内容，可能含有R18内容，请勿在公共场所浏览，以免造成不必要的困扰
+                网站已启用 NSFW,
+                您可访问本站所有内容，可能含有R18内容，请勿在公共场所浏览，以免造成不必要的困扰
               </div>
             </div>
           </div>
@@ -238,7 +240,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
               className={cn(
                 !isCollapsed && 'mb-2',
                 isAdSection &&
-                'mb-4 mx-1 p-3 bg-default-50 dark:bg-default-100/10 border border-pink-200 dark:border-pink-400/50 rounded-lg shadow-sm backdrop-blur-sm'
+                  'mb-4 mx-1 p-3 bg-default-50 dark:bg-default-100/10 border border-primary dark:border-primary/50 rounded-lg shadow-sm backdrop-blur-sm'
               )}
             >
               {index > 0 && !isAdSection && (
