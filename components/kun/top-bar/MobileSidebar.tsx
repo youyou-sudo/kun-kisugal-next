@@ -74,7 +74,7 @@ const navSections = [
       },
       {
         name: '精品飞机杯',
-        href: 'https://detail.tmall.com/item.htm?id=1018649046685&spm=a21dvs.23580594.0.0.1e1f645eDQUnq8',
+        href: 'https://s.tb.cn/c.0x1IWF',
         icon: HeartIcon
       },
       { name: '黄油圈', href: 'https://l3.zexqh.com/dh980', icon: HeartIcon }
