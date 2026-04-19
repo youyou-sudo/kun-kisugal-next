@@ -62,7 +62,7 @@ export const GalgameCard = ({ patch }: Props) => {
       {/* 封面图下方的信息 */}
       <div className="flex flex-col gap-1 px-1">
         <h2
-          className="font-semibold text-sm transition-colors truncate text-foreground/90 group-hover:text-primary"
+          className="font-semibold text-sm transition-colors line-clamp-2 text-foreground/90 group-hover:text-primary"
           title={patch.name}
         >
           {patch.name}
