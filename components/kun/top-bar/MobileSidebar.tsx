@@ -72,7 +72,11 @@ const navSections = [
         href: 'https://s.tb.cn/c.0x1IWF',
         icon: HeartIcon
       },
-      { name: '黄油圈', href: 'https://l3.zexqh.com/dh980', icon: HeartIcon }
+      {
+        name: '黄油圈',
+        href: 'https://hbbq4.digital/hycdh980',
+        icon: HeartIcon
+      }
     ]
   }
 ]

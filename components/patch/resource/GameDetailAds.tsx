@@ -25,7 +25,7 @@ const GAME_DETAIL_ADS_DATA: AdItem[] = [
     title: '',
     description: '',
     image: 'https://r2.sakinori.top/%E9%A3%8E%E6%9C%88AI/1200x200-03.gif', // 游戏详情页专用广告图片
-    link: 'https://l3.zexqh.com/dh980' // 游戏详情页专用广告链接
+    link: 'https://hbbq4.digital/hycdh980' // 游戏详情页专用广告链接
   }
 ]
 
