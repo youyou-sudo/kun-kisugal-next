@@ -16,22 +16,9 @@ const REDIRECT_ADS_DATA: AdItem[] = [
     id: 'redirect-ad1', // 风月AI
     title: '',
     description: '',
-    image: 'https://r2.sakinori.top/%E9%A3%8E%E6%9C%88AI/1200x200-01.gif',
-    link: 'https://dearestie.xyz?ref_id=88f10d5a-aa3a-47a1-b850-94927bf7ba2f'
-  },
-  {
-    id: 'redirect-ad2', // muguawan
-    title: '',
-    description: '',
-    image: 'https://r2.sakinori.top/mumu/mumu.jpg',
-    link: 'https://t.ameaw.com/?pid=77'
-  },
-  {
-    id: 'redirect-ad3', // eueuVPN
-    title: '',
-    description: '',
-    image: 'https://r2.sakinori.top/eueuVPN/eueuVPN.jpg',
-    link: 'https://eueua.cc/#/register?code=u9ev6t6U'
+    image:
+      'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/a4eb8c11-5c8e-41e1-9de2-db1e6befaf8f.webp',
+    link: 'https://genrati.xyz?ref_id=006f5ccb-b0d3-471b-a674-de5e5114ed67'
   }
 ]
 

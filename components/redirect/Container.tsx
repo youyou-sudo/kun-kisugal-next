@@ -28,7 +28,7 @@ export const KunRedirectContainer = () => {
           />
         </div> */}
 
-        {/* <RedirectAds /> */}
+        <RedirectAds />
       </div>
     </div>
   )

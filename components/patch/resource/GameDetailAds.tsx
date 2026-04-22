@@ -17,34 +17,20 @@ const GAME_DETAIL_ADS_DATA: AdItem[] = [
     id: 'game-detail-ad1', //风月AI
     title: '',
     description: '',
+    image:
+      'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/a4eb8c11-5c8e-41e1-9de2-db1e6befaf8f.webp', // 游戏详情页专用广告图片
+    link: 'https://genrati.xyz?ref_id=006f5ccb-b0d3-471b-a674-de5e5114ed67' // 游戏详情页专用广告链接
+  },
+  {
+    id: 'game-detail-ad2', //黄油圈
+    title: '',
+    description: '',
     image: 'https://r2.sakinori.top/%E9%A3%8E%E6%9C%88AI/1200x200-03.gif', // 游戏详情页专用广告图片
-    link: 'https://dearestie.xyz?ref_id=88f10d5a-aa3a-47a1-b850-94927bf7ba2f' // 游戏详情页专用广告链接
-  },
-  {
-    id: 'redirect-ad3', //null
-    title: '',
-    description: '',
-    image: 'https://r2.sakinori.top/eueuVPN/eueuVPN.jpg',//https://r2.sakinori.top/1200x200.png
-    link: 'https://eueua.cc/#/register?code=u9ev6t6U'
-  },
-  {
-    id: 'redirect-ad4', //muguawan
-    title: '',
-    description: '',
-    image: 'https://r2.sakinori.top/mumu/mumu.jpg',
-    link: 'https://t.ameaw.com/?pid=77'
-  },
-  {
-    id: 'game-detail-ad2', //soulai
-    title: '',
-    description: '',
-    image: 'https://r2.sakinori.top/mumu/soul.gif',
-    link: 'https://sch.wbnbg.com?channel=7018' // 游戏详情页专用广告链接
+    link: 'https://l3.zexqh.com/dh980' // 游戏详情页专用广告链接
   }
 ]
 
 export const GameDetailAds = () => {
-
   if (GAME_DETAIL_ADS_DATA.length === 0) {
     return null
   }
@@ -52,10 +38,13 @@ export const GameDetailAds = () => {
   return (
     <section className="relative w-full max-w-7xl mx-auto mt-6">
       {/* 广告内容 */}
-      <div className={`grid gap-4 ${GAME_DETAIL_ADS_DATA.length === 1
-        ? 'grid-cols-1'
-        : 'grid-cols-1 md:grid-cols-2'
-        }`}>
+      <div
+        className={`grid gap-4 ${
+          GAME_DETAIL_ADS_DATA.length === 1
+            ? 'grid-cols-1'
+            : 'grid-cols-1 md:grid-cols-2'
+        }`}
+      >
         {GAME_DETAIL_ADS_DATA.map((ad) => (
           <Card
             key={ad.id}
