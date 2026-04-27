@@ -72,18 +72,6 @@ const navSections = [
           image:
             'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/%E6%96%B9.jpg'
         }
-      },
-      {
-        name: '黄油圈',
-        description: '福利游戏合集，你想要的都在这里~',
-        href: 'https://hbbq4.digital/hycdh980',
-        icon: HeartIcon,
-        popover: {
-          title: '黄油圈',
-          description: '黄油圈',
-          image:
-            'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/1.jpg'
-        }
       }
     ]
   },
