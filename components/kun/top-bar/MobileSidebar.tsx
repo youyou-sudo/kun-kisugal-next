@@ -28,15 +28,13 @@ interface MobileSidebarProps {
   onClose: () => void
 }
 
-// 这里的 navSections 内容已根据你的 PC 端代码完全同步
 const navSections = [
   {
     title: '推荐内容',
     items: [
       {
         name: 'Ai女友💋',
-        description:
-          '🌟在线畅玩。顶尖色情，即刻生图😍多样角色场景18禁性癖待你开发！💋',
+        description: '🌟在线畅玩。顶尖色情，即刻生图😍场景18禁性癖待你开发！💋', // 缩减了文字长度
         href: 'https://genrati.xyz?ref_id=006f5ccb-b0d3-471b-a674-de5e5114ed67',
         icon: HeartIcon
       },
@@ -48,8 +46,7 @@ const navSections = [
       },
       {
         name: '⚡️翻墙Vpn推荐',
-        description:
-          '翻墙Vpn推荐，加速下载！觉得下载资源慢？觉得加载页面不丝滑？',
+        description: '翻墙加速下载！觉得资源慢？加载不丝滑？',
         href: 'https://eueua.cc/#/register?code=V437MLYw',
         icon: HeartIcon
       }
@@ -67,7 +64,7 @@ const navSections = [
       },
       {
         name: '模拟器及使用教程',
-        description: 'Galgame 模拟器及使用教程',
+        description: '模拟器及使用教程',
         href: '/tutorial',
         icon: BookUser
       },
@@ -114,16 +111,17 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
   const pathname = usePathname()
   const settings = useSettingStore((state) => state.data)
   const [shouldRender, setShouldRender] = useState(isOpen)
+  const [isAnimate, setIsAnimate] = useState(false)
 
-  // 原有逻辑：控制 Body 滚动锁
+  // 动画控制核心：确保组件挂载后延迟触发动画，避免首刷无动画
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden'
       setShouldRender(true)
+      const timer = setTimeout(() => setIsAnimate(true), 10) // 微延迟
+      document.body.style.overflow = 'hidden'
+      return () => clearTimeout(timer)
     } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
+      setIsAnimate(false)
       document.body.style.overflow = ''
     }
   }, [isOpen])
@@ -133,7 +131,6 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
     if (!isOpen) setShouldRender(false)
   }
 
-  // 1:1 移植 PC 端的 NSFW 提醒逻辑
   const NSFWNotice = () => {
     const isSFW = settings.kunNsfwEnable === 'sfw'
     const isNSFW = settings.kunNsfwEnable === 'nsfw'
@@ -141,12 +138,10 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
 
     if (isSFW) {
       return (
-        <div className="mx-3 mb-2 p-3 bg-primary/20 border border-primary/40 rounded-lg">
-          <div className="flex items-start gap-2 text-[11px] leading-snug">
-            <Shield className="w-3.5 h-3.5 text-danger mt-0.5 flex-shrink-0" />
-            <span>
-              部分内容已隐藏。如需查看所有 Galgame，请在导航栏开启 NSFW 模式。
-            </span>
+        <div className="mx-2 mb-2 p-2 bg-primary/20 border border-primary/40 rounded-lg">
+          <div className="flex items-start gap-1.5 text-[10px] leading-tight">
+            <Shield className="w-3 h-3 text-danger mt-0.5 flex-shrink-0" />
+            <span>NSFW 内容已隐藏。</span>
           </div>
         </div>
       )
@@ -154,12 +149,10 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
 
     if (isNSFW || isAll) {
       return (
-        <div className="mx-3 mb-2 p-3 bg-pink-50 dark:bg-pink-950/20 border border-pink-200 dark:border-pink-800 rounded-lg">
-          <div className="flex items-start gap-2 text-[11px] leading-snug text-pink-600 dark:text-pink-400">
-            <Eye className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
-            <span>
-              网站已进入 NSFW 模式，可能含有 R18 内容，请注意周围环境。
-            </span>
+        <div className="mx-2 mb-2 p-2 bg-pink-50 dark:bg-pink-950/20 border border-pink-200 dark:border-pink-800 rounded-lg">
+          <div className="flex items-start gap-1.5 text-[10px] leading-tight text-pink-600 dark:text-pink-400">
+            <Eye className="w-3 h-3 mt-0.5 flex-shrink-0" />
+            <span>进入 NSFW 模式。</span>
           </div>
         </div>
       )
@@ -171,34 +164,34 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
 
   return (
     <>
-      {/* 遮罩逻辑保留 */}
+      {/* 遮罩 */}
       <div
         className={cn(
           'fixed inset-0 bg-black/50 z-40 transition-opacity duration-300',
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          isAnimate ? 'opacity-100' : 'opacity-0'
         )}
         onClick={onClose}
       />
 
-      {/* 弹出栏逻辑保留：translate 控制平移 */}
+      {/* 侧栏 - 宽度缩小至 210px */}
       <div
         className={cn(
-          'fixed top-0 left-0 bottom-0 w-[260px] bg-background z-50 flex flex-col',
+          'fixed top-0 left-0 bottom-0 w-[210px] bg-background z-50 flex flex-col',
           'transform transition-transform duration-300 ease-out shadow-2xl',
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          isAnimate ? 'translate-x-0' : '-translate-x-full'
         )}
         onTransitionEnd={handleTransitionEnd}
       >
-        <div className="flex items-center justify-between p-4 border-b border-divider">
+        <div className="flex items-center justify-between p-3 border-b border-divider">
           <Link href="/" className="flex items-center gap-2" onClick={onClose}>
             <Image
               src="/favicon.webp"
               alt="Logo"
-              width={32}
-              height={32}
+              width={28}
+              height={28}
               className="rounded-lg"
             />
-            <span className="font-bold text-primary">
+            <span className="font-bold text-sm text-primary">
               {kunMoyuMoe.creator.name}
             </span>
           </Link>
@@ -209,11 +202,11 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
             radius="full"
             onPress={onClose}
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </Button>
         </div>
 
-        <div className="flex-1 overflow-y-auto py-3 scrollbar-hide">
+        <div className="flex-1 overflow-y-auto py-2 scrollbar-hide">
           <NSFWNotice />
 
           {navSections.map((section) => {
@@ -223,28 +216,28 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
               <div
                 key={section.title}
                 className={cn(
-                  'mb-4 px-2',
+                  'mb-3 px-1.5',
                   isAdSection &&
-                    'mx-2 p-3 bg-default-50 dark:bg-default-100/10 border border-primary/50 rounded-xl shadow-sm backdrop-blur-sm'
+                    'mx-1.5 p-2 bg-default-50 dark:bg-default-100/10 border border-primary/40 rounded-xl shadow-sm backdrop-blur-sm'
                 )}
               >
                 <h2
                   className={cn(
-                    'px-3 py-1 text-[11px] font-bold uppercase mb-1',
+                    'px-2 py-1 text-[10px] font-bold uppercase mb-0.5',
                     isAdSection ? 'text-primary' : 'text-default-400'
                   )}
                 >
                   {isAdSection ? '✨ ' + section.title : section.title}
                 </h2>
 
-                <ul className="space-y-1">
+                <ul className="space-y-0.5">
                   {section.items.map((item: any) => (
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        onClick={onClose} // 点击关闭侧栏逻辑
+                        onClick={onClose}
                         className={cn(
-                          'flex items-start p-2 rounded-lg transition-colors',
+                          'flex items-start p-1.5 rounded-lg transition-colors',
                           pathname === item.href
                             ? 'bg-primary text-primary-foreground'
                             : 'active:bg-default-100 text-foreground'
@@ -252,7 +245,7 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
                       >
                         <item.icon
                           className={cn(
-                            'w-5 h-5 mt-0.5 flex-shrink-0',
+                            'w-4 h-4 mt-0.5 flex-shrink-0',
                             pathname === item.href
                               ? 'text-primary-foreground'
                               : isAdSection
@@ -261,17 +254,18 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
                           )}
                         />
 
-                        <div className="flex flex-col ms-3 min-w-0">
-                          {/* 字体大小严格对齐：标题 sm，副标题 xs */}
-                          <span className="text-sm font-semibold leading-tight">
+                        <div className="flex flex-col ms-2 min-w-0">
+                          {/* 标题缩小至 13px */}
+                          <span className="text-[13px] font-semibold leading-tight">
                             {item.name}
                           </span>
+                          {/* 描述缩小至 10.5px */}
                           <span
                             className={cn(
-                              'text-xs mt-1 leading-normal break-words',
+                              'text-[10.5px] mt-0.5 leading-snug break-words',
                               pathname === item.href
                                 ? 'text-primary-foreground/80'
-                                : 'text-default-500'
+                                : 'text-default-400'
                             )}
                           >
                             {item.description}
