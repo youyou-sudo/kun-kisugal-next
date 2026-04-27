@@ -16,7 +16,8 @@ import {
   HeartMinus,
   ClipboardList,
   X,
-  HeartIcon
+  HeartIcon,
+  BookUser
 } from 'lucide-react'
 import { Button } from '@heroui/button'
 import { memo, useEffect, useState } from 'react'
@@ -32,6 +33,10 @@ const navSections = [
     items: [{ name: '首页', href: '/', icon: Home }]
   },
   {
+    title: '模拟器及使用教程',
+    items: [{ name: '模拟器及使用教程', href: '/tutorial', icon: BookUser }]
+  },
+  {
     title: '游戏信息',
     items: [
       { name: 'Galgame', href: '/galgame', icon: Gamepad2 },
@@ -45,13 +50,6 @@ const navSections = [
     items: [
       { name: '社区评论', href: '/comment', icon: MessagesSquare },
       { name: '社区话题', href: '/topic', icon: Hash }
-    ]
-  },
-  {
-    title: '其他',
-    items: [
-      { name: '友情链接', href: '/friend-link', icon: HeartMinus },
-      { name: '待办事项', href: '/todo', icon: ClipboardList }
     ]
   },
   {
