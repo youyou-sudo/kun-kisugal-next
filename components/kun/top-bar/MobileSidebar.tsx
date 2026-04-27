@@ -1,5 +1,6 @@
 'use client'
 
+import React, { memo, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -21,7 +22,6 @@ import {
   HeartMinus
 } from 'lucide-react'
 import { Button } from '@heroui/button'
-import { memo, useEffect, useState } from 'react'
 import { useSettingStore } from '~/store/settingStore'
 
 interface MobileSidebarProps {
@@ -29,28 +29,69 @@ interface MobileSidebarProps {
   onClose: () => void
 }
 
-// 完全复刻 PC 端的 navSections 内容与结构
+// 1. 优化后的 NSFWNotice：文字更大，卡片更醒目
+const NSFWNotice = ({ nsfwStatus }: { nsfwStatus: string }) => {
+  const isSFW = nsfwStatus === 'sfw'
+  const isNSFW = nsfwStatus === 'nsfw'
+  const isAll = nsfwStatus === 'all'
+
+  if (isSFW) {
+    return (
+      <div className="mx-2 mb-3 p-3.5 bg-primary/20 border border-primary/40 rounded-xl">
+        <div className="flex items-start gap-2.5 leading-snug text-foreground">
+          <Shield className="w-4.5 h-4.5 text-danger flex-shrink-0 mt-0.5" />
+          <div className="flex flex-col gap-1">
+            <div className="font-bold text-[11.5px] text-danger">
+              部分 Galgame 已被隐藏
+            </div>
+            <div className="text-[10.5px] text-default-600 dark:text-default-400">
+              网站未启用 NSFW, 部分 Galgame 不可见, 要查看所有内容,
+              请在顶部导航栏切换模式。
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (isNSFW || isAll) {
+    return (
+      <div className="mx-2 mb-3 p-3.5 bg-pink-50 dark:bg-pink-950/20 border border-pink-200 dark:border-pink-800 rounded-xl text-pink-600 dark:text-pink-400">
+        <div className="flex items-start gap-2.5 leading-snug">
+          <Eye className="w-4.5 h-4.5 flex-shrink-0 mt-0.5" />
+          <div className="flex flex-col gap-1">
+            <div className="font-bold text-[11.5px]">网站已进入 NSFW 模式</div>
+            <div className="text-[10.5px]">
+              您可访问本站所有内容，可能含有 R18
+              内容，请勿在公共场所浏览，以免造成不必要的困扰。
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  return null
+}
+
 const navSections = [
   {
     title: '推荐内容',
     items: [
       {
         name: 'Ai女友💋',
-        description:
-          '🌟在线畅玩。顶尖色情，即刻生图😍多样角色场景18禁性癖待你开发！💋',
+        description: '顶尖色情，即刻生图😍',
         href: 'https://genrati.xyz?ref_id=006f5ccb-b0d3-471b-a674-de5e5114ed67',
         icon: HeartIcon
       },
       {
         name: '精品飞机杯',
-        description: 'AYU-4396 没落女仆のメイド教育😍',
+        description: 'AYU-4396 没落女仆教育😍',
         href: 'https://s.tb.cn/c.0x1IWF',
         icon: HeartIcon
       },
       {
         name: '翻墙Vpn推荐',
-        description:
-          '翻墙Vpn推荐，加速下载！觉得下载资源慢？觉得加载页面不丝滑？',
+        description: '加速下载，加载更丝滑！',
         href: 'https://eueua.cc/#/register?code=V437MLYw',
         icon: HeartIcon
       }
@@ -67,8 +108,8 @@ const navSections = [
         icon: Gamepad2
       },
       {
-        name: '模拟器及使用教程',
-        description: 'Galgame 模拟器及使用教程',
+        name: '模拟器及教程',
+        description: '模拟器及使用教程',
         href: '/tutorial',
         icon: BookUser
       },
@@ -108,106 +149,50 @@ const navSections = [
       },
       { name: '话题列表', description: '最新话题', href: '/topic', icon: Hash }
     ]
-  },
-  {
-    title: '其他',
-    items: [
-      {
-        name: '友情链接',
-        description: '可爱的好朋友们！',
-        href: '/friend-link',
-        icon: HeartMinus
-      }
-    ]
   }
 ]
 
 const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
   const pathname = usePathname()
-  const settings = useSettingStore((state) => state.data)
-  const [shouldRender, setShouldRender] = useState(isOpen)
+  const nsfwEnable = useSettingStore((state) => state.data.kunNsfwEnable)
+  const [shouldRender, setShouldRender] = useState(false)
   const [isAnimate, setIsAnimate] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
       setShouldRender(true)
-      const timer = requestAnimationFrame(() => setIsAnimate(true))
+      const frame = requestAnimationFrame(() => setIsAnimate(true))
       document.body.style.overflow = 'hidden'
-      return () => cancelAnimationFrame(timer)
+      return () => cancelAnimationFrame(frame)
     } else {
       setIsAnimate(false)
+      const timer = setTimeout(() => setShouldRender(false), 300)
       document.body.style.overflow = ''
+      return () => clearTimeout(timer)
     }
   }, [isOpen])
 
-  const handleTransitionEnd = () => {
-    if (!isOpen) setShouldRender(false)
-  }
-
-  // 完整还原 NSFW 提示逻辑与文字内容
-  const NSFWNotice = () => {
-    const isSFW = settings.kunNsfwEnable === 'sfw'
-    const isNSFW = settings.kunNsfwEnable === 'nsfw'
-    const isAll = settings.kunNsfwEnable === 'all'
-
-    if (isSFW) {
-      return (
-        <div className="mx-2 mb-3 p-2 bg-primary/10 border border-primary/30 rounded-lg">
-          <div className="flex items-start gap-1.5 text-[10px] leading-snug">
-            <Shield className="w-3.5 h-3.5 text-danger flex-shrink-0 mt-0.5" />
-            <div>
-              <div className="font-bold">部分内容已隐藏</div>
-              <div className="text-default-500">
-                网站未启用 NSFW, 部分 Galgame 不可见, 要查看所有 Galgame,
-                请在顶部导航栏切换网站内容显示
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    }
-
-    if (isNSFW || isAll) {
-      return (
-        <div className="mx-2 mb-3 p-2 bg-pink-50 dark:bg-pink-950/20 border border-pink-200 dark:border-pink-800 rounded-lg">
-          <div className="flex items-start gap-1.5 text-[10px] leading-snug text-pink-600 dark:text-pink-400">
-            <Eye className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
-            <div>
-              <div className="font-bold">网站已进入NSFW模式</div>
-              <div>
-                网站已启用 NSFW,
-                您可访问本站所有内容，可能含有R18内容，请勿在公共场所浏览，以免造成不必要的困扰
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    }
-    return null
-  }
-
-  if (!shouldRender) return null
+  if (!shouldRender && !isOpen) return null
 
   return (
     <>
-      {/* 遮罩：修复点击穿透关键 */}
       <div
         className={cn(
-          'fixed inset-0 bg-black/50 z-40 transition-opacity duration-300',
+          'fixed inset-0 bg-black/50 transition-opacity duration-300 z-[100]',
           isAnimate ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         onClick={onClose}
       />
 
-      {/* 侧栏：宽度 210px，字体极致缩小 */}
-      <div
+      <aside
         className={cn(
-          'fixed top-0 left-0 bottom-0 w-[210px] bg-background z-50 flex flex-col',
+          'fixed top-0 left-0 bottom-0 w-[210px] bg-background z-[101] flex flex-col',
           'transform transition-transform duration-300 ease-out shadow-2xl',
           isAnimate ? 'translate-x-0' : '-translate-x-full'
         )}
-        onTransitionEnd={handleTransitionEnd}
+        onTransitionEnd={() => !isOpen && setShouldRender(false)}
       >
+        {/* Header */}
         <div className="flex items-center justify-between p-3 border-b border-divider">
           <Link href="/" className="flex items-center gap-2" onClick={onClose}>
             <Image
@@ -217,7 +202,7 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
               height={24}
               className="rounded-lg"
             />
-            <span className="font-bold text-[13px] text-primary leading-none">
+            <span className="font-bold text-[13px] text-primary">
               {kunMoyuMoe.creator.name}
             </span>
           </Link>
@@ -233,78 +218,84 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
         </div>
 
         <div className="flex-1 overflow-y-auto py-2 scrollbar-hide">
-          <NSFWNotice />
+          <NSFWNotice nsfwStatus={nsfwEnable} />
 
-          {navSections.map((section) => {
+          {navSections.map((section, index) => {
             const isAdSection = section.title === '推荐内容'
 
             return (
-              <div
-                key={section.title}
-                className={cn(
-                  'mb-3 px-1',
-                  isAdSection &&
-                    'mx-1.5 mb-4 p-2 bg-default-50 dark:bg-default-100/10 border border-primary dark:border-primary/50 rounded-xl shadow-sm backdrop-blur-sm'
+              <React.Fragment key={section.title}>
+                {/* 隔离横线 */}
+                {index > 0 && !isAdSection && (
+                  <div className="mx-4 my-1.5 border-t border-divider/60" />
                 )}
-              >
-                <h2
+
+                <div
                   className={cn(
-                    'px-2.5 py-1 text-[10px] font-bold uppercase mb-0.5 transition-opacity',
-                    isAdSection ? 'text-primary' : 'text-default-400'
+                    'mb-2 px-1',
+                    // 推荐内容板块：缩小了内边距(p-1.5)和间距(mb-3)，使其更紧凑
+                    isAdSection &&
+                      'mx-1.5 mb-3 p-1.5 bg-default-50 dark:bg-default-100/10 border border-primary/30 rounded-xl shadow-inner backdrop-blur-sm'
                   )}
                 >
-                  {isAdSection ? '✨ ' + section.title : section.title}
-                </h2>
+                  <h2
+                    className={cn(
+                      'px-2.5 py-1 text-[10px] font-bold uppercase mb-0.5',
+                      isAdSection ? 'text-primary' : 'text-default-400'
+                    )}
+                  >
+                    {isAdSection ? '✨ ' + section.title : section.title}
+                  </h2>
 
-                <ul className="space-y-0.5">
-                  {section.items.map((item: any) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        onClick={onClose}
-                        className={cn(
-                          'flex items-start p-1.5 mx-1 rounded-lg transition-colors',
-                          pathname === item.href
-                            ? 'bg-primary text-primary-foreground'
-                            : 'active:bg-default-100 text-foreground'
-                        )}
-                      >
-                        <item.icon
+                  <ul className="space-y-0.5">
+                    {section.items.map((item) => (
+                      <li key={item.name}>
+                        <Link
+                          href={item.href}
+                          onClick={onClose}
                           className={cn(
-                            'w-4 h-4 mt-0.5 flex-shrink-0',
+                            'flex items-start p-1.5 mx-1 rounded-lg transition-colors',
                             pathname === item.href
-                              ? 'text-primary-foreground'
-                              : isAdSection
-                                ? 'text-primary'
-                                : 'text-default-500'
+                              ? 'bg-primary/10 text-primary font-bold'
+                              : 'active:bg-default-100 text-foreground'
                           )}
-                        />
-
-                        <div className="flex flex-col ms-2.5 min-w-0">
-                          {/* 字体主标 13px，副标 10.5px */}
-                          <span className="text-[13px] font-semibold leading-tight break-words">
-                            {item.name}
-                          </span>
-                          <span
+                        >
+                          <item.icon
                             className={cn(
-                              'text-[10.5px] mt-0.5 leading-snug break-words',
+                              'w-4 h-4 mt-0.5 flex-shrink-0',
                               pathname === item.href
-                                ? 'text-primary-foreground/80'
-                                : 'text-default-500'
+                                ? 'text-primary'
+                                : isAdSection
+                                  ? 'text-primary'
+                                  : 'text-default-500'
                             )}
-                          >
-                            {item.description}
-                          </span>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                          />
+
+                          <div className="flex flex-col ms-2.5 min-w-0">
+                            <span className="text-[12.5px] font-semibold leading-tight break-words">
+                              {item.name}
+                            </span>
+                            <span
+                              className={cn(
+                                'text-[10px] mt-0.5 leading-snug break-words font-normal',
+                                pathname === item.href
+                                  ? 'text-primary/80'
+                                  : 'text-default-500'
+                              )}
+                            >
+                              {item.description}
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </React.Fragment>
             )
           })}
         </div>
-      </div>
+      </aside>
     </>
   )
 }
