@@ -29,11 +29,11 @@ interface MobileSidebarProps {
 
 const navSections = [
   {
-    title: null,
+    title: 'Home',
     items: [{ name: '首页', href: '/', icon: Home }]
   },
   {
-    title: '模拟器及使用教程',
+    title: '工具及教程',
     items: [{ name: '模拟器及使用教程', href: '/tutorial', icon: BookUser }]
   },
   {
