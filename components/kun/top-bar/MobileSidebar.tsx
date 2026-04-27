@@ -157,7 +157,10 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
             <Shield className="w-3.5 h-3.5 text-danger flex-shrink-0 mt-0.5" />
             <div>
               <div className="font-bold">部分内容已隐藏</div>
-              <div className="text-default-500">可在顶部切换显示模式</div>
+              <div className="text-default-500">
+                网站未启用 NSFW, 部分 Galgame 不可见, 要查看所有 Galgame,
+                请在顶部导航栏切换网站内容显示
+              </div>
             </div>
           </div>
         </div>
@@ -170,8 +173,11 @@ const MobileSidebarComponent = ({ isOpen, onClose }: MobileSidebarProps) => {
           <div className="flex items-start gap-1.5 text-[10px] leading-snug text-pink-600 dark:text-pink-400">
             <Eye className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
             <div>
-              <div className="font-bold">已进入NSFW模式</div>
-              <div>请勿在公共场所浏览</div>
+              <div className="font-bold">网站已进入NSFW模式</div>
+              <div>
+                网站已启用 NSFW,
+                您可访问本站所有内容，可能含有R18内容，请勿在公共场所浏览，以免造成不必要的困扰
+              </div>
             </div>
           </div>
         </div>
