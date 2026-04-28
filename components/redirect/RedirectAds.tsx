@@ -17,7 +17,7 @@ const REDIRECT_ADS_DATA: AdItem[] = [
     title: '',
     description: '',
     image:
-      'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/a4eb8c11-5c8e-41e1-9de2-db1e6befaf8f.webp',
+      'https://d.acgll.com/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/a4eb8c11-5c8e-41e1-9de2-db1e6befaf8f.webp',
     link: 'https://genrati.xyz?ref_id=006f5ccb-b0d3-471b-a674-de5e5114ed67'
   }
 ]

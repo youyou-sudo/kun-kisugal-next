@@ -40,13 +40,18 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'd.kisugal.icu',
+        hostname: 'd.acgll.com',
         port: '',
         pathname: '/**'
       }
     ]
   },
-  serverExternalPackages: ['puppeteer', 'puppeteer-core', 'puppeteer-extra', 'puppeteer-extra-plugin-stealth'],
+  serverExternalPackages: [
+    'puppeteer',
+    'puppeteer-core',
+    'puppeteer-extra',
+    'puppeteer-extra-plugin-stealth'
+  ],
 
   output: 'standalone',
   experimental: {

@@ -57,7 +57,7 @@ const navSections = [
           title: '彼之良淘宝官方旗舰店',
           description: '飞机杯',
           image:
-            'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/49464505B8D77779CC2807573F7F287C.jpg'
+            'https://d.acgll.com/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/49464505B8D77779CC2807573F7F287C.jpg'
         }
       },
       {
@@ -70,7 +70,7 @@ const navSections = [
           title: 'VPN',
           description: '⚡️翻墙Vpn推荐',
           image:
-            'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/%E6%96%B9.jpg'
+            'https://d.acgll.com/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/%E6%96%B9.jpg'
         }
       }
     ]

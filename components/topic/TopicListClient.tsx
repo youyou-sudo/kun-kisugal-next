@@ -71,14 +71,14 @@ const glgc = [
   {
     title: '翻墙Vpn推荐⚡️',
     imageurl:
-      'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/%E6%96%B9.jpg',
+      'https://d.acgll.com/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/%E6%96%B9.jpg',
     url: 'https://eueua.cc/#/register?code=V437MLYw',
     content: '翻墙Vpn推荐，加速下载！觉得下载资源慢？觉得加载页面不丝滑？'
   },
   {
     title: '精品飞机杯',
     imageurl:
-      'https://d.kisugal.icu/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/49464505B8D77779CC2807573F7F287C.jpg',
+      'https://d.acgll.com/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/49464505B8D77779CC2807573F7F287C.jpg',
     url: 'https://s.tb.cn/c.0x1IWF',
     content: null
   }
