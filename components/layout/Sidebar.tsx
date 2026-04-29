@@ -51,7 +51,7 @@ const navSections = [
       {
         name: '精品飞机杯',
         description: 'AYU-4396 没落女仆のメイド教育😍',
-        href: 'https://s.tb.cn/c.0x1IWF',
+        href: 'https://e.tb.cn/h.iv7rE7l9dsxvPYC?tk=X5aK5P47bUz',
         icon: HeartIcon,
         popover: {
           title: '彼之良淘宝官方旗舰店',

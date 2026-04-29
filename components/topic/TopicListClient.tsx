@@ -79,7 +79,7 @@ const glgc = [
     title: '精品飞机杯',
     imageurl:
       'https://d.acgll.com/%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/49464505B8D77779CC2807573F7F287C.jpg',
-    url: 'https://s.tb.cn/c.0x1IWF',
+    url: 'https://e.tb.cn/h.iv7rE7l9dsxvPYC?tk=X5aK5P47bUz',
     content: null
   }
 ]
